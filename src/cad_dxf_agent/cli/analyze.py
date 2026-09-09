@@ -6,7 +6,7 @@ capabilities call an LLM or require an API key — they are pure deterministic
 extractors, which makes this CLI the stable contract the Claude Code skill drives.
 
 Subcommands:
-  compliance  ADA/IBC/custom rule validation
+  compliance  built-in ADA/IBC/residential rule screening
   health      drawing quality / health report
   takeoff     automated quantity takeoff
   summary     plain-English drawing summary
@@ -24,7 +24,7 @@ from pathlib import Path
 from ezdxf.lldxf.const import DXFStructureError
 
 from .. import __version__
-from ..core.compliance_rules import check_compliance
+from ..core.compliance_rules import BUILTIN_PROFILES, check_compliance
 from ..core.drawing_summarizer import summarize_drawing
 from ..core.dxf_reader import load_dxf
 from ..core.health_checker import check_drawing_health
@@ -131,10 +131,11 @@ def build_parser() -> argparse.ArgumentParser:
     _add("summary", cmd_summary, "Plain-English drawing summary")
     _add("rfi", cmd_rfi, "Generate RFIs from detected ambiguities")
 
-    p_comp = _add("compliance", cmd_compliance, "ADA/IBC/custom compliance check")
+    p_comp = _add("compliance", cmd_compliance, "Built-in ADA/IBC/residential screening")
     p_comp.add_argument(
         "--profile",
         default="ada",
+        choices=sorted(BUILTIN_PROFILES),
         help="Compliance profile (default: ada; e.g. ibc-2021, residential)",
     )
 
