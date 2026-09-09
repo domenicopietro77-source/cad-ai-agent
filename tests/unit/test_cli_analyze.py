@@ -49,6 +49,11 @@ class TestAnalyzeJsonOutput:
         data = json.loads(out)
         assert "ibc" in data["profile_name"].lower()
 
+    def test_unknown_compliance_profile_is_rejected_by_parser(self):
+        with pytest.raises(SystemExit) as exc:
+            build_parser().parse_args(["compliance", "drawing.dxf", "--profile", "custom"])
+        assert exc.value.code == 2
+
     def test_zones_tolerance_flag_accepted(self, dxf):
         code, out = _run(["zones", dxf, "--tolerance", "1.0", "--json"])
         assert code == 0
