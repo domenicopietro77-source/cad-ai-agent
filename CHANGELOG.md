@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Hardened the public `cad-dxf-agent` skill and plugin to version 0.2.0 with
+  consent-bound, commit-pinned installation; exact runtime output contracts;
+  read-only comparison scope; and explicit building-code screening limits.
+- Restricted `cad-analyze compliance --profile` to the three implemented
+  built-in profiles instead of advertising an unsupported custom profile.
+
 ## [0.12.0] - 2026-04-01
 
 ### Added
