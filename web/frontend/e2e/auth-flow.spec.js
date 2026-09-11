@@ -89,7 +89,10 @@ test.describe('Authentication Flow', () => {
     ).toBeVisible({ timeout: 15_000 });
 
     // Re-login via REST API + IndexedDB injection (same pattern as global-setup)
-    const apiKey = 'AIzaSyD2ocFCZ9h9xZqU0GYojASqpsA1IwIIpGI';
+    const apiKey = process.env.VITE_FIREBASE_API_KEY;
+    if (!apiKey) {
+      throw new Error('VITE_FIREBASE_API_KEY is required for production authentication tests');
+    }
     const resp = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
       {
