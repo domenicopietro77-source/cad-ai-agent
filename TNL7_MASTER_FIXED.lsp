@@ -96,6 +96,7 @@
       (cons 8 layer)
       (cons 10 (point-x p1p)) (cons 20 (point-y p1p)) (cons 30 0.0)
       (cons 11 (point-x p2p)) (cons 21 (point-y p2p)) (cons 31 0.0))))
+)
 
 (defun create-circle-entity (center radius layer)
   (let* ((cp (as-2d-point center)))
